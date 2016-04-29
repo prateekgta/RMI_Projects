@@ -1,0 +1,71 @@
+
+import java.util.*;
+
+
+
+
+
+
+public class CheckTime implements Runnable{
+
+	
+	public static  HashSet<Bacon> hs=new HashSet<Bacon>();
+	
+	
+	@SuppressWarnings("deprecation")
+	public void run(){
+	  
+		while(true){
+			try {
+				Thread.sleep(2000);
+				
+				Date tm=new Date();
+				
+					
+				
+				if(!hs.isEmpty())
+				{
+					for(Bacon b: hs)
+					{
+					Integer hour=tm.getHours();		
+					Integer min=tm.getMinutes();
+					Integer sec= tm.getSeconds();
+					b.time= b.time.replaceAll("\\s+","");
+					String s1[]=b.time.split(":");
+					Integer bHour=Integer.parseInt(s1[0]);
+					Integer bMin=Integer.parseInt(s1[1]);
+					Integer bSec=Integer.parseInt(s1[2]);
+					System.out.println("System timings"+hour+":"+min+":"+sec);
+					System.out.println("Bacon timing"+bHour+":"+bMin+":"+bSec);
+					Integer cc=sec-bSec;
+					System.out.println("difference in time : --"+cc);
+					
+					
+							if(cc==20)
+							{
+								System.out.println("Port Dead, no response from client :"+b.port);
+								hs.remove(b);
+								System.out.println("list of sets "+hs.toArray());
+								break;
+							}
+						
+					}
+					
+				}
+				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	 }
+	
+	
+	public static void setList(Integer port,Bacon newB) {
+		hs.add(newB);
+	}
+
+}
+	
+

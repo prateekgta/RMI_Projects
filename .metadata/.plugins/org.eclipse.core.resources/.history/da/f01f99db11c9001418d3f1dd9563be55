@@ -1,0 +1,57 @@
+
+import java.util.HashSet;
+import java.util.*;
+
+
+
+
+
+
+public class CheckTime implements Runnable{
+
+	
+	public static  HashSet<Bacon> hs=new HashSet<Bacon>();
+	
+	Date tm=new Date();
+	
+	
+	
+	public void run(){
+	  
+		while(true){
+			try {
+				Thread.sleep(20000);
+				Integer hour=tm.getHours();
+				Integer min=tm.getMinutes();
+				Integer sec= tm.getSeconds();
+				
+				
+				if(!hs.isEmpty())
+				{
+					for(Bacon b: hs)
+					{
+					String s1[]=b.time.split(":");
+					Integer currentHour=Integer.parseInt(s1[0]);
+					Integer currentMin=Integer.parseInt(s1[1]);
+					Integer currentSec=Integer.parseInt(s1[2]);
+					
+					if(currentHour=hour)
+					
+					}
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	 }
+	
+	
+	public static void setList(Integer port,Bacon newB) {
+		hs.add(newB);
+	}
+
+}
+	
+

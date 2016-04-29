@@ -1,0 +1,88 @@
+
+import java.util.*;
+
+
+
+
+
+
+public class CheckTime implements Runnable{
+
+	
+	public static  HashSet<Bacon> hs=new HashSet<Bacon>();
+	Date tm=new Date();
+	
+	
+	@SuppressWarnings("deprecation")
+	public void run(){
+	  
+		while(true){
+			try {
+				Thread.sleep(2000);
+				Integer hour=tm.getHours();		
+				Integer min=tm.getMinutes();
+				Integer sec= tm.getSeconds();
+				
+				System.out.println("System timings"+hour+":"+min+":"+sec);
+				
+				if(!hs.isEmpty())
+				{
+					for(Bacon b: hs)
+					{
+					String s1[]=b.time.split(":");
+					Integer bHour=Integer.parseInt(s1[0]);
+					Integer bMin=Integer.parseInt(s1[1]);
+					s1[2]=s1[2].replace("","");
+					System.out.println("in string"+s1[2]);
+					Integer bSec=Integer.parseInt(s1[2]);
+					
+			//		System.out.println("Bacon timing"+bHour+":"+bMin+":"+bSec);
+					
+		//			System.out.println(bSec-sec);
+					
+		/*			if(bHour==hour)
+					{
+						if(bMin==min)
+						{
+							if((bSec-sec>=0)&&(bSec-sec)<10)
+							{
+								System.out.println("Port is Listening");
+							}
+							else
+							{
+								System.out.println("Port Dead, no response from client :"+b.port);
+								hs.remove(b);
+							}
+						}
+						else
+						{
+							System.out.println("Port Dead, no response from client :"+b.port);
+							hs.remove(b);
+						}
+					}
+					else
+					{
+						System.out.println("Port Dead, no response from client :"+b.port);
+						hs.remove(b);
+					}
+					*/
+					}
+					
+				}
+				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	 }
+	
+	
+	public static void setList(Integer port,Bacon newB) {
+		hs.add(newB);
+	}
+
+}
+	
+
